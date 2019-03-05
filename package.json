@@ -1,0 +1,20 @@
+{
+  "name": "mongodb_crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "git": "^0.1.5",
+    "joi": "^14.3.1",
+    "mongodb": "^3.1.13",
+    "path": "^0.12.7",
+    "react": "^16.8.3"
+  }
+}
