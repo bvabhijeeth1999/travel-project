@@ -32,6 +32,7 @@ app.get('/forgotpassword',(req,res) => {
 });
 
 var result1=null;
+const port = process.env.PORT || 3000;
 db.connect((err)=>
 {
     if(err)
@@ -40,9 +41,9 @@ db.connect((err)=>
         process.exit(1);
     }
     else{
-        app.listen(3000,()=>
+        app.listen(port,()=>
         {
-            console.log('listining to port 3000');
+            console.log(`listening to port ${port}`);
         });
     }
 });
