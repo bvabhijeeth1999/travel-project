@@ -12,7 +12,7 @@ const tkt = require('../../models/tkt');
 
 var result1  = [];
 
-router.post('/signup',(req,res) => {
+router.post('https://easygo-t22.herokuapp.com/signup',(req,res) => {
     
 
     db.getDb().collection(collection).insertOne({
@@ -30,7 +30,7 @@ router.post('/signup',(req,res) => {
     });
 });
 
-router.post('/login',(req,res) => {
+router.post('https://easygo-t22.herokuapp.com/login',(req,res) => {
   
     console.log('inside possst');
     console.log(req.body.username);
@@ -56,7 +56,7 @@ router.post('/login',(req,res) => {
     
 });
 
-router.post('/book_tickets',(req,res) => {
+router.post('https://easygo-t22.herokuapp.com/book_tickets',(req,res) => {
     console.log(req.body.source);
     console.log(req.body.destination);
     db.getDb().collection(collection1).find({
@@ -72,7 +72,7 @@ router.post('/book_tickets',(req,res) => {
     });
 });
 
-router.get('/book_tickets/bus_list',(req,res) => {
+router.get('https://easygo-t22.herokuapp.com/book_tickets/bus_list',(req,res) => {
 
 ;
 

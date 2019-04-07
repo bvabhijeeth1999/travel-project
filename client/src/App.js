@@ -22,12 +22,12 @@ class App extends Component {
         <BrowserRouter>
           <NavBar />
           <Container>
-          <Route exact path="/login/" component={Login} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/book_tickets/" component={BookT} />
-          <Route exact path="/book_tickets/seats_booking/" component={SeatB} />
-          <Route exact path="/book_tickets/bus_list/" component={BusList} />
-          <Route exact path="/signup/" component={Signup} />
+          <Route exact path="https://easygo-t22.herokuapp.com/login/" component={Login} />
+          <Route exact path="https://easygo-t22.herokuapp.com/" component={Home} />
+          <Route exact path="https://easygo-t22.herokuapp.com/book_tickets/" component={BookT} />
+          <Route exact path="https://easygo-t22.herokuapp.com/book_tickets/seats_booking/" component={SeatB} />
+          <Route exact path="https://easygo-t22.herokuapp.com/book_tickets/bus_list/" component={BusList} />
+          <Route exact path="https://easygo-t22.herokuapp.com/signup/" component={Signup} />
           </Container>
         </BrowserRouter>
       </div>
