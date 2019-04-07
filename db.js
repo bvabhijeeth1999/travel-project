@@ -2,7 +2,7 @@ const MongoClient=require('mongodb').MongoClient;
 const ObjectID=require('mongodb').ObjectID;
 
 const dbName="test";
-const url="mongodb://abhi:abhijeeth@cluster0-shard-00-00-8qxkw.mongodb.net:27017,cluster0-shard-00-01-8qxkw.mongodb.net:27017,cluster0-shard-00-02-8qxkw.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true";
+const url='mongodb+srv://abhi:abhijeeth@cluster0-8qxkw.mongodb.net/test?retryWrites=true';
 
 const mongoOptions={useNewUrlParser:true};
 
