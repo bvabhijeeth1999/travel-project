@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 const mongoOptions = {useNewUrlParser:true};
 const router = express.Router();
 const db = require('./db');
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 
 
 
