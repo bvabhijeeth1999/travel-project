@@ -31,7 +31,7 @@ class BusList extends Component {
                   <td>
                     <Button color="primary">
                       <NavLink
-                        href="/book_tickets/seats_booking/"
+                        href="https://easygo-t22.herokuapp.com/book_tickets/seats_booking/"
                         style={{ color: "white" }}
                       >
                         Select
@@ -47,7 +47,7 @@ class BusList extends Component {
                   <td>
                     <Button color="primary">
                       <NavLink
-                        href="/book_tickets/seats_booking/"
+                        href="https://easygo-t22.herokuapp.com/book_tickets/seats_booking/"
                         style={{ color: "white" }}
                       >
                         Select
@@ -63,7 +63,7 @@ class BusList extends Component {
                   <td>
                     <Button color="primary">
                       <NavLink
-                        href="/book_tickets/seats_booking/"
+                        href="https://easygo-t22.herokuapp.com/book_tickets/seats_booking/"
                         style={{ color: "white" }}
                       >
                         Select

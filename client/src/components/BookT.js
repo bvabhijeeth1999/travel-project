@@ -110,7 +110,7 @@ onSubmit = (e) => {
                       value = {this.state.doj}
                     />
                   </FormGroup>
-                <Button href='/book_tickets/bus_list/' color="success">Submit </Button>
+                <Button href='https://easygo-t22.herokuapp.com/book_tickets/bus_list/' color="success">Submit </Button>
                 </Form>
               </Col>
             </Row>

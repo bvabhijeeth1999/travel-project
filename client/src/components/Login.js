@@ -28,7 +28,7 @@ class Login extends React.Component {
     if (nextProps.auth.isAuthenticated) {
         console.log('hi');
         console.log(this.state);
-        this.props.history.push("/book_tickets");
+        this.props.history.push("https://easygo-t22.herokuapp.com/book_tickets");
     } 
 
     if (nextProps.errors) {

@@ -5,7 +5,7 @@ export const addUser = (user) => dispatch => {
     console.log("in userActions");
     console.log(user);
     axios
-        .post('/signup/',user)
+        .post('https://easygo-t22.herokuapp.com/signup/',user)
         .then(res => 
             dispatch({
                 type : ADD_USER,
@@ -16,7 +16,7 @@ export const addUser = (user) => dispatch => {
 
 export const findUser = (userData) => dispatch => {
     axios
-      .post('/login/', userData)
+      .post('https://easygo-t22.herokuapp.com/login/', userData)
       .then(res =>
         dispatch({
           type: SET_CURRENT_USER,
@@ -34,7 +34,7 @@ export const findUser = (userData) => dispatch => {
 export const bookTkt = (info) => dispatch => {
     console.log(info);
     axios
-        .post('/book_tickets/',info)
+        .post('https://easygo-t22.herokuapp.com/book_tickets/',info)
         .then(res => 
             dispatch({
                 type : BOOK_TKT,
@@ -46,7 +46,7 @@ export const bookTkt = (info) => dispatch => {
 export const getBuses = (info) => dispatch => {
     console.log(info);
     axios
-        .get('/book_tickets/bus_list',info)
+        .get('https://easygo-t22.herokuapp.com/book_tickets/bus_list',info)
         .then(res => 
             dispatch({
                 type : GET_BUSES,

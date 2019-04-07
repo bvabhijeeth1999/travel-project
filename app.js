@@ -27,7 +27,7 @@ db.connect((err)=>
     }
 });
 
-app.use('/',users);
+app.use('https://easygo-t22.herokuapp.com/',users);
 
 
 
