@@ -7,7 +7,7 @@
     rgba(121, 9, 100, 0.6643032212885154) 35%,
     rgba(0, 212, 255, 1) 100%
   ); */
-  background-color: gray;
+  background-color: green;
   height: 25rem;
 }
 
@@ -129,7 +129,7 @@
 }
 
 .UC {
-  position: relative;
+  position: absolute;
   left: 50rem;
   top: 10rem;
   height: 13rem;
