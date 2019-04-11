@@ -130,10 +130,10 @@
 
 .UC {
   position: absolute;
-  left: 60rem;
+  left: 50rem;
   top: 10rem;
   height: 13rem;
-  width: 30rem;
+  width: 25rem;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2%;
