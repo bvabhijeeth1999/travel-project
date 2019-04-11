@@ -23,7 +23,7 @@ class App extends Component {
         <BrowserRouter>
           <NavBar />
           <Container>
-          <Route exact path="https://fathomless-crag-52588.herokuapp.com/login/" component={Login} />
+          <Route exact path="/login/" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/book_tickets/:a" component={BookT} />
           <Route exact path="/book_tickets/seats_booking/" component={SeatB} />
