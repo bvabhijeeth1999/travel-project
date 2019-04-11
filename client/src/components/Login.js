@@ -80,7 +80,7 @@ onSubmit = (e) => {
           <Nav tabs>
           {/* <img className="img-responsive logo " alt="" src="easygoimg.png" /> */}
             <NavItem>
-              <NavLink href="/login/"
+              <NavLink href="https://fathomless-crag-52588.herokuapp.com/login/"
                 className={classnames({ active: this.state.activeTab === "1" })}
                 onClick={() => {
                   this.toggle("1");
@@ -90,7 +90,7 @@ onSubmit = (e) => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/signup/"
+              <NavLink href="https://fathomless-crag-52588.herokuapp.com/signup/"
                 className={classnames({ active: this.state.activeTab === "2" })}
                 onClick={() => {
                   this.toggle("2");
