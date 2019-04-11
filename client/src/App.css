@@ -129,7 +129,7 @@
 }
 
 .UC {
-  position: absolute;
+  position: relative;
   left: 50rem;
   top: 10rem;
   height: 13rem;
