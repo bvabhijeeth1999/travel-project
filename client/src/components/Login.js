@@ -28,7 +28,7 @@ class Login extends React.Component {
     if (nextProps.auth.isAuthenticated) {
         console.log('hi');
         console.log(this.state);
-        this.props.history.push("https://easygo-t22.herokuapp.com/book_tickets");
+        this.props.history.push(`/book_tickets/${this.state.username}`);
     } 
 
     if (nextProps.errors) {
@@ -67,7 +67,7 @@ onSubmit = (e) => {
 
         console.log('inside component');
         console.log(fuser);
-      this.props.findUser(fuser);
+      this.props.findUser(this.state.username,this.state.password,fuser);
     }
 
     
@@ -77,8 +77,8 @@ onSubmit = (e) => {
    
     return (
       <div className="Login">
-        <div className="LoginBox">
           <Nav tabs>
+          {/* <img className="img-responsive logo " alt="" src="easygoimg.png" /> */}
             <NavItem>
               <NavLink href="/login/"
                 className={classnames({ active: this.state.activeTab === "1" })}
@@ -100,13 +100,14 @@ onSubmit = (e) => {
               </NavLink>
             </NavItem>
           </Nav>
+          <img className="bran" src={require('./easygoimg.png')} />
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <Row>
                 <Col sm={{ size: 6, offset: 3 }}>
                   <Form onSubmit = {this.onSubmit}>
                     <FormGroup>
-                      <Label for="exampleName">Username</Label>
+                      <Label for="exampleName" className="headi">Username</Label>
                       <Input
                         type="text"
                         name = "username"
@@ -117,7 +118,7 @@ onSubmit = (e) => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label for="examplePassword">Password</Label>
+                      <Label for="examplePassword" className="headi">Password</Label>
                       <Input
                         type="password"
                         name="password"
@@ -189,7 +190,6 @@ onSubmit = (e) => {
             </TabPane>
           </TabContent>
         </div>
-      </div>
     );
   }
 }

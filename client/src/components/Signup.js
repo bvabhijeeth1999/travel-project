@@ -68,7 +68,6 @@ onSubmit = (e) => {
    
     return (
       <div className="Login">
-        <div className="LoginBox">
           <Nav tabs>
             <NavItem>
               <NavLink href="/login/"
@@ -91,6 +90,7 @@ onSubmit = (e) => {
               </NavLink>
             </NavItem>
           </Nav>
+          <img className="bran" src={require('./easygoimg.png')} />
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <Row>
@@ -128,7 +128,7 @@ onSubmit = (e) => {
                 <Col sm={{ size: 6, offset: 3 }}>
                   <Form onSubmit = {this.onSubmit}>
                     <FormGroup>
-                      <Label for="exampleEmail">Email</Label>
+                      <Label for="exampleEmail" className="headi">Email</Label>
                       <Input
                         type="email"
                         name="email"
@@ -139,7 +139,7 @@ onSubmit = (e) => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label for="exampleName">Username</Label>
+                      <Label for="exampleName" className="headi">Username</Label>
                       <Input
                         type="text"
                         name="username"
@@ -150,7 +150,7 @@ onSubmit = (e) => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label for="examplePassword">Password</Label>
+                      <Label for="examplePassword" className="headi">Password</Label>
                       <Input
                         type="password"
                         name="password"
@@ -161,7 +161,7 @@ onSubmit = (e) => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label for="exampleDOB">D.O.B</Label>
+                      <Label for="exampleDOB" className="headi">D.O.B</Label>
                       <Input
                         type="date"
                         name="dob"
@@ -178,7 +178,6 @@ onSubmit = (e) => {
             </TabPane>
           </TabContent>
         </div>
-      </div>
     );
   }
 }

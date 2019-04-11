@@ -1,24 +1,19 @@
 .header {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
+  background: orange;
+  color:black;
+  /*background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(121, 9, 100, 0.6643032212885154) 35%,
     rgba(0, 212, 255, 1) 100%
-  );
-  color: white;
-  height: 27.5rem;
+  ); */
+  background-color: blue;
+  height: 25rem;
 }
 
 .hf {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(121, 9, 100, 0.6643032212885154) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  color: white;
+   background:gray;
+   color: white;
 }
 
 .logo {
@@ -41,14 +36,14 @@
 }
 
 .Login {
-  background: #59c173; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+  /*background: #59c173; /* fallback for old browsers */
+  /*background: -webkit-linear-gradient(
     to right,
     #5d26c1,
     #a17fe0,
     #59c173
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
+  /*background: linear-gradient(
     to right,
     #5d26c1,
     #a17fe0,
@@ -59,17 +54,16 @@
   height: 20rem;
   box-sizing: border-box;
 }
-
-.Login .LoginBox {
+ .LoginBox {
   position: relative;
-  background: #59c173; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+ /* background: #59c173; /* fallback for old browsers */
+ /* background: -webkit-linear-gradient(
     to right,
     #5d26c1,
     #a17fe0,
     #59c173
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
+  /*background: linear-gradient(
     to right,
     #5d26c1,
     #a17fe0,
@@ -84,16 +78,21 @@
   border-radius: 1%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.Login.LoginBox:hover {
+.LoginBox:hover {
   box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.headi {
+  color: black;
+  font-size: 120%
 }
 
 .BookT {
   position: relative;
-  background: #00b4db;
-  background: -webkit-linear-gradient(to right, #0083b0, #00b4db);
-  background: linear-gradient(to right, #0083b0, #00b4db);
-  top: 10rem;
+  background: lightgreen;
+  /*background: -webkit-linear-gradient(to right, #0083b0, #00b4db);
+  background: linear-gradient(to right, #0083b0, #00b4db);*/
+  top: 5rem;
   left: 10rem;
   height: 25rem;
   width: 30rem;
@@ -104,42 +103,66 @@
 }
 
 .BookT:hover {
-  box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
+ /* box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .book {
-  background: #59c173; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+ /* background: #59c173; /* fallback for old browsers */
+ /* background: -webkit-linear-gradient(
     to right,
     #5d26c1,
     #a17fe0,
     #59c173
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
+  /*background: linear-gradient(
     to right,
     #5d26c1,
     #a17fe0,
     #59c173
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height: 70rem;
+  height: 25rem;
   box-sizing: border-box;
   border-radius: 2%;
 }
 .touch {
-  background: #5cb85c;
+  /*background: #5cb85c;*/
 }
 
 .UC {
   position: absolute;
-  left: 43rem;
-  top: 17rem;
-  height: 18rem;
-  width: 40rem;
+  left: 45rem;
+  top: 10rem;
+  height: 13rem;
+  width: 30rem;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2%;
 }
 
+.mybook{
+  position: relative;
+  left: -1rem;
+}
+
 .UC:hover {
   box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bran{
+  position: absolute;
+  top: 7rem;
+  width: 15%;
+}
+
+.book-btn{
+  position: relative;
+  left:22rem;
+}
+
+.lead{
+  font-size: 250%;
+}
+.noos{
+  width: 15%;
+  size:15%;
 }

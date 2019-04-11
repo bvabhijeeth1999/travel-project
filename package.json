@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "dev": "nodemon app.js",
+    "dev": "node app.js",
     "client": "npm start --prefix client",
-    "start": "concurrently \"npm run dev\" \"npm run client\""
+    "start": "concurrently \"npm run dev\" \"npm run client\" "
   },
   "author": "",
   "license": "ISC",

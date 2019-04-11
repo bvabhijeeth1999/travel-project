@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 //import SeatB from "./SeatB";
 import { connect } from 'react-redux';
-import {bookTkt} from '../actions/userActions';
+import {bookTkt,getBuses,getBookings} from '../actions/userActions';
 import login from './Login';
 
 const items = [
@@ -41,8 +41,9 @@ const items = [
 
 class BookT extends Component {
   state = {
-      source : 'hyderabad',
-      destination : 'hyderabad',
+    //  username : this.props.match.params,
+      source : 'Hyderabad',
+      destination : 'Visakhapatnam',
       doj : ''
   };
 
@@ -55,15 +56,29 @@ onSubmit = (e) => {
   e.preventDefault();
 
   const tkt = {
+    username : this.props.match.params.a,
     source : this.state.source,
     destination : this.state.destination,
     doj : this.state.doj
   }
 
-  console.log(login.state);
+  console.log(this.props.match.params);
   console.log('inside component');
-  this.props.bookTkt(tkt);
-  
+  this.props.history.push(`bus_list/${this.props.match.params.a}/${this.state.source}/${this.state.destination}/${this.state.doj}`);
+
+  this.props.getBuses(this.state.source,this.state.destination,this.props.match.params.a,this.state.doj);
+   
+}
+
+onBookClick = (username) => {
+  console.log(username);
+
+  const bookuser = {
+    username : username
+  }
+
+  this.props.history.push(`mybook/${username}`);
+  this.props.getBookings(username);
 }
 
   render() {
@@ -80,11 +95,12 @@ onSubmit = (e) => {
                     <Input type="select" 
                           name="source" 
                           id="exampleSelect" 
+                          placeholder = "select source"
                           onChange = {this.onChange}
                           value = {this.state.source}>
-                      <option>hyderabad</option>
-                      <option>visakhapatnam</option>
-                      <option>vijayawada</option>
+                      <option>Hyderabad</option>
+                      <option>Visakhapatnam</option>
+                      <option>Vijayawada</option>
                     </Input>
                   </FormGroup>
                   <FormGroup>
@@ -94,9 +110,11 @@ onSubmit = (e) => {
                             id="exampleSelect"  
                             onChange = {this.onChange}
                             value = {this.state.destination}>
-                      <option>hyderabad</option>
-                      <option>visakhapatnam</option>
-                      <option>vijayawada</option>
+                      
+                      <option>Visakhapatnam</option>
+                      <option>Hyderabad</option>
+                      <option>Vijayawada</option>
+
                     </Input>
                   </FormGroup>
                   <FormGroup>
@@ -105,12 +123,14 @@ onSubmit = (e) => {
                       type="date"
                       name="doj"
                       id="exampleDOB"
-                      placeholder="DOB placeholder"
                       onChange = {this.onChange}
                       value = {this.state.doj}
                     />
                   </FormGroup>
-                <Button href='https://easygo-t22.herokuapp.com/book_tickets/bus_list/' color="success">Submit </Button>
+                  <Button
+                  onClick = {this.onBookClick.bind(this,this.props.match.params.a)} className="mybook" color="secondary" >
+                     Mybookings</Button>
+                <Button color="success">Submit </Button>
                 </Form>
               </Col>
             </Row>
@@ -129,4 +149,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {bookTkt})(BookT);
+export default connect(mapStateToProps, {bookTkt,getBuses,getBookings})(BookT);

@@ -5,3 +5,5 @@ export const BOOK_TKT = 'BOOK_TKT';
 export const GET_BUSES = 'GET_BUSES';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const GET_ERRORS = 'GET_ERRORS';
+export const ADD_BOOKING = 'ADD_BOOKING';
+export const GET_BOOKINGS = 'GET_BOOKINGS';
