@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines" : {
+    "node" : "10.15.1",
+    "npm" : "6.4.1"
+  },
   "scripts": {
     "client-install": "npm install --prefix client",
     "dev": "node app.js",
     "client": "npm start --prefix client",
-    "start": "concurrently \"npm run dev\" \"npm run client\" "
+    "start": "concurrently \"npm run dev\" \"npm run client\" ",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +27,7 @@
     "mongoose-type-email": "^1.0.10",
     "nodemon": "^1.18.10",
     "path": "^0.12.7",
-    "react": "^16.8.3"
+    "react": "^16.8.3",
+    "node" : "^10.15.1"
   }
 }
