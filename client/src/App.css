@@ -7,7 +7,7 @@
     rgba(121, 9, 100, 0.6643032212885154) 35%,
     rgba(0, 212, 255, 1) 100%
   ); */
-  background-color: green;
+  background-color: lightgray;
   height: 25rem;
 }
 
@@ -130,10 +130,10 @@
 
 .UC {
   position: absolute;
-  left: 50rem;
+  left: 60rem;
   top: 10rem;
   height: 13rem;
-  width: 25rem;
+  width: 28rem;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2%;
