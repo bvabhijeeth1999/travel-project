@@ -57,9 +57,9 @@ onSubmit = (e) => {
 
     //add user via add user action.
       this.props.addUser(newUser);
-
-
-    }
+  
+      this.props.history.push('/login');
+  }
 
     
 
@@ -171,7 +171,7 @@ onSubmit = (e) => {
                         value = {this.state.dob}
                       />
                     </FormGroup>
-                    <Button href="/login/" color="success">Submit</Button>
+                    <Button  color="success">Submit</Button>
                   </Form>
                 </Col>
               </Row>
