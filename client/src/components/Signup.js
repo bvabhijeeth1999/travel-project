@@ -171,7 +171,7 @@ onSubmit = (e) => {
                         value = {this.state.dob}
                       />
                     </FormGroup>
-                    <Button /*href="/login/"*/ color="success">Submit</Button>
+                    <Button href="/login/" color="success">Submit</Button>
                   </Form>
                 </Col>
               </Row>
