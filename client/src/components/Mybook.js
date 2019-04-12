@@ -38,10 +38,12 @@ class Mybook extends Component {
         <Container>
         <ListGroup>
             <TransitionGroup className = "Mybook">
-                {bookings.map( ({ _id, bus_id , doj , nos , cost}) => (
+                {bookings.map( ({ _id, bus_id ,source , destination, doj , nos , cost }) => (
                     <CSSTransition key={_id} timeout={500} classNames="fade">
                         <ListGroupItem>
                         <b>BUS_ID : </b> {bus_id} <br />
+                        <b>SOURCE : </b> {source} <br />
+                        <b>DESTINATION : </b> {destination} <br />
                         <b>DATE OF JOURNEY : </b> {doj} <br />
                         <b>NO OF SEATS : </b>{nos} <br />
                         <b>TOTAL COST : </b>{cost} 

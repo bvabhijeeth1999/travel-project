@@ -109,6 +109,8 @@ router.post('/book_tickets/bus_list/:username/:source/:destination/:doj',(req,re
     db.getDb().collection(collection2).insertOne({
         username : req.body.username,
         bus_id : req.body.id,
+        source : req.body.source,
+        destination : req.body.destination,
         doj : req.body.doj,
         nos : req.body.nos,
         cost : req.body.cost,
