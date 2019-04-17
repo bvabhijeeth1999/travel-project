@@ -38,7 +38,7 @@ class Home extends Component {
                 </Card>
               </UncontrolledCollapse>
             </div>
-          </Jumbotron>
+          </Jumbotron>          
         </div>
         <h5>Contact</h5><p>
           &ensp;

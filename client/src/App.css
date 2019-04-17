@@ -1,6 +1,7 @@
 .header {
   background: orange;
   color:black;
+  
   /*background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
@@ -124,9 +125,6 @@
   box-sizing: border-box;
   border-radius: 2%;
 }
-.touch {
-  /*background: #5cb85c;*/
-}
 
 .UC {
   position: absolute;
@@ -166,3 +164,4 @@
   width: 15%;
   size:15%;
 }
+
