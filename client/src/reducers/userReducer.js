@@ -1,13 +1,16 @@
 import {
     ADD_USER,
     USERS_LOADING,
-    FIND_USER
+    FIND_USER,
+    GET_BALANCE,
+    UPDATE_BALANCE
 } from '../actions/types';
 
 const initialState = {
     users : [],
     loading: false,
-    found : false
+    found : false,
+    balance : '0'
 }
 
 export default function(state = initialState,action){
@@ -30,6 +33,20 @@ export default function(state = initialState,action){
             return{
                 ...state,
                 found : true
+            }
+        case GET_BALANCE:
+            console.log('inside getbalance case');
+            console.log(action.payload.balance);
+            return{
+                ...state,
+                balance : action.payload.balance
+            }
+        case UPDATE_BALANCE:
+            console.log('inside UPDATEbalance case');
+            console.log(action.payload.balance);
+            return{
+                ...state,
+                balance : action.payload.balance
             }
         default : 
             return state;

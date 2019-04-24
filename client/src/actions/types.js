@@ -7,3 +7,7 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const GET_ERRORS = 'GET_ERRORS';
 export const ADD_BOOKING = 'ADD_BOOKING';
 export const GET_BOOKINGS = 'GET_BOOKINGS';
+export const GET_BALANCE = 'GET_BALANCE';
+export const UPDATE_BALANCE = 'UPDATE_BALANCE';
+export const DELETE_BOOKING = 'DELETE_BOOKING';
+export const GET_SEATS = 'GET_SEATS';

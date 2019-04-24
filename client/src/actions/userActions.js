@@ -1,6 +1,5 @@
 import axios from 'axios';
-import {ADD_USER,USERS_LOADING,FIND_USER,BOOK_TKT,SET_CURRENT_USER,GET_ERRORS,GET_BUSES,ADD_BOOKING,GET_BOOKINGS} from './types';
-
+import {ADD_USER,USERS_LOADING,FIND_USER,BOOK_TKT,SET_CURRENT_USER,GET_ERRORS,GET_BUSES,ADD_BOOKING,GET_BOOKINGS,GET_BALANCE, UPDATE_BALANCE, DELETE_BOOKING,GET_SEATS} from './types';
 export const addUser = (user) => dispatch => {
     console.log("in userActions");
     console.log(user);
@@ -76,6 +75,49 @@ export const getBookings = (username) => dispatch => {
         );
 };
 
+export const getBalance = (username) => dispatch => {
+    axios
+        .get(`/mywallet/${username}`)
+        .then(res => 
+            dispatch({
+                type : GET_BALANCE,
+                payload : res.data
+            })
+        );
+};
+
+export const updateBalance = (username,newbalance) => dispatch => {
+    axios
+        .put(`/mywallet/${username}/${newbalance}`)
+        .then(res => 
+            dispatch({
+                type : UPDATE_BALANCE,
+                payload : res.data
+            })
+        );
+};
+
+export const deleteBooking = (username,id) => dispatch => {
+    axios
+        .delete(`/book_tickets/mybook/${username}/${id}`)
+        .then(res => 
+            dispatch({
+                type : DELETE_BOOKING,
+                payload : res.data
+            })
+        );
+};
+
+export const getNoOfSeats = (id,doj) => dispatch => {
+    axios
+        .get(`/mybook/${id}/${doj}`)
+        .then(res => 
+            dispatch({
+                type : GET_SEATS,
+                payload : res.data
+            })
+        );
+};
 
 
 

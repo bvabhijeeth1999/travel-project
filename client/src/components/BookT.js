@@ -81,6 +81,16 @@ onBookClick = (username) => {
   this.props.getBookings(username);
 }
 
+onBookClick1 = (username) => {
+  console.log(username);
+
+  const bookuser = {
+    username : username
+  }
+
+  this.props.history.push(`mywallet/${username}`);
+}
+
   render() {
     return (
       <div className="touch" color="success">
@@ -130,6 +140,9 @@ onBookClick = (username) => {
                   <Button
                   onClick = {this.onBookClick.bind(this,this.props.match.params.a)} className="mybook" color="secondary" >
                      Mybookings</Button>
+                     <Button
+                  onClick = {this.onBookClick1.bind(this,this.props.match.params.a)} className="MyWallet" color="secondary" >
+                     My Wallet</Button>
                 <Button color="success">Submit </Button>
                 </Form>
               </Col>

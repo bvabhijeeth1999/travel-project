@@ -7,6 +7,7 @@ const db = require('../../db');
 //User Model
 const User = require('../../models/User');
 const tkt = require('../../models/tkt');
+var ObjectId = require('mongodb').ObjectID;
 // @route POST api/users
 // @desc Add new users
 // @access Public
@@ -20,7 +21,8 @@ router.post('/signup',(req,res) => {
         email : req.body.email,
         name : req.body.username,
         password : req.body.password,
-        dob : req.body.dob
+        dob : req.body.dob,
+        balance : req.body.balance
     },(err,result)=>
     {
         if(err) console.log('errrr');
@@ -151,6 +153,106 @@ router.get('/mybook/:username',(req,res) => {
 
 
 
+});
+
+router.get('/mywallet/:username',(req,res) => {
+  
+    console.log('inside possst');
+    console.log(req.params.username);
+
+    db.getDb().collection(collection).findOne({
+        name : req.params.username
+    },(err,result)=>
+    {
+        if(err) console.log(errrr);
+        else
+        {
+            console.log(result);
+            res.send(result);
+        }
+       
+    });
+    
+});
+
+router.put('/mywallet/:username/:balance',(req,res) => {
+  
+    console.log('inside possst');
+    console.log(req.params.username);
+    console.log('printing the new balance');
+    console.log(req.params.balance);
+    db.getDb().collection(collection).findOneAndUpdate({ name : req.params.username},{$set : {balance : req.params.balance}},{returnOrginal: false},(err,result)=>
+    {
+        if(err) console.log("errrroorrr");
+        else{
+            console.log('printing the result from users.js put route')
+            console.log(result);
+          //  res.send(result);
+        }
+    });
+    
+});
+
+router.delete('/book_tickets/mybook/:username/:id',(req,res) => {
+    //var dojo = doj.toString();
+    db.getDb().collection(collection2).deleteMany({
+        "_id": ObjectId(req.params.id)
+         
+    },(err,result)=>
+    {
+        if(err){  
+            res.status(404).json({success : false});
+        }
+        else{
+            console.log(req.params.id);
+           // console.log(dojo);
+            console.log(result);
+            res.send('booking is successfully deleted');
+        }
+    });
+
+    
+});
+
+router.get('/mybook/:id/:doj',(req,res) => {
+    //var dojo = doj.toString();
+    db.getDb().collection(collection2).count({
+         bus_id : req.params.id,
+         doj : req.params.doj
+    },(err,result)=>
+    {
+        if(err){  
+            res.status(404).json({success : false});
+        }
+        else{
+            console.log(req.params.id);
+           // console.log(dojo);
+           console.log('printing count');
+            console.log(result);
+            res.send(result);
+        }
+    });
+
+    
+});
+
+
+router.put('/book_tickets/bus_list/:username/:source/:destination/:doj/:money',(req,res) => {
+  
+    console.log('inside possst');
+    console.log(req.params.username);
+    console.log('printing the money to be deducted');
+    console.log(req.params.money);
+    db.getDb().collection(collection).findOneAndUpdate({ name : req.params.username},{$set : {balance : req.params.balance}},{returnOrginal: false},(err,result)=>
+    {
+        if(err) console.log("errrroorrr");
+        else{
+            console.log('printing the result from users.js put route')
+            console.log(result);
+          //  res.send(result);
+        }
+    });
+    
 });
 
 module.exports = router;

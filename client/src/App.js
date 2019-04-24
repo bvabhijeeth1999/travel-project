@@ -14,6 +14,7 @@ import store from './store';
 import {Container} from 'reactstrap';
 import Signup from "./components/Signup";
 import Mybook from "./components/Mybook"
+import MyWallet from "./components/MyWallet"
 
 class App extends Component {
   render() {
@@ -30,6 +31,10 @@ class App extends Component {
           <Route exact path="/book_tickets/bus_list/:username/:source/:destination/:doj" component={BusList} />
           <Route exact path="/signup/" component={Signup} />
           <Route exact path="/book_tickets/mybook/:username" component={Mybook}/>
+          <Route exact path="/book_tickets/mywallet/:username" component={MyWallet}/>
+          <Route exact path="/book_tickets/mywallet/:username/:balance" component={MyWallet}/>
+          
+          <Route exact path="/book_tickets/mybook/:username/:id" component={Mybook}/>
           </Container>
         </BrowserRouter>
       </div>

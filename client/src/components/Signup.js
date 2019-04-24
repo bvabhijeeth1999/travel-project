@@ -36,7 +36,8 @@ class Signup extends React.Component {
     email : '',
     username : '',
     password : '',
-    dob : ''
+    dob : '',
+    balance : ''
   };
 
 onChange = (e) => {
@@ -50,7 +51,8 @@ onSubmit = (e) => {
         email : this.state.email,
         username : this.state.username,
         password : this.state.password,
-        dob : this.state.dob
+        dob : this.state.dob,
+        balance : '0'
     }
 
     console.log(newUser);
