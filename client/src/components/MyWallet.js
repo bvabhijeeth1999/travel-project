@@ -25,11 +25,15 @@ import {getBalance,updateBalance} from '../actions/userActions';
 
 class MyWallet extends Component {
   state = {
-      addMoney : ''
+      addMoney : '',
+      balance : '0'
   };
 
   componentDidMount(){
     console.log('printing');
+    this.props.getBalance(this.props.match.params.username);
+    this.state.balance = this.props.user.balance;
+
   }
 
   onChange = (e) => {
@@ -38,6 +42,7 @@ class MyWallet extends Component {
 
   onBookClick = (username) => {
         this.props.getBalance(username);
+        this.state.balance = this.props.user.balance;
         console.log("printing the username from on book click inside my wallet");
         console.log(username);
        // console.log(this.props.user);
@@ -67,6 +72,16 @@ class MyWallet extends Component {
               onClick = {this.onBookClick.bind(this,this.props.match.params.username)} className="MyWallet" color="secondary"
               >
               GET BALANCE</Button>
+              <FormGroup>
+                      <Label for="exampleName">Balance</Label>
+                      <Input
+                        type="text"
+                        name = "balance"
+                        id="exampleName"
+                        placeholder="Current balance"
+                        value = {this.state.balance}
+                      />
+                    </FormGroup>
               <FormGroup>
                       <Label for="exampleName">Add money</Label>
                       <Input
