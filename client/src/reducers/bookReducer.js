@@ -8,7 +8,7 @@ import {
 const initialState = {
     user : '',
     bookings : [],
-    seats : ''
+    seats : '0'
 }
 
 export default function(state = initialState,action){
@@ -35,9 +35,10 @@ export default function(state = initialState,action){
                // bookings : action.payload
             }
         case GET_SEATS:
+            console.log(`printing in the book reducer ${action.payload.seat}`);
         return {
             ...state,
-            seats : action.payload
+            seats : action.payload.seat
         }
         default : 
             return state;

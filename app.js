@@ -1,19 +1,22 @@
 const express=require('express');
 const bodyParser=require('body-parser');
-const mongoose = require('mongoose');
 const users = require('./routes/api/users');
 const app=express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
-const mongoOptions = {useNewUrlParser:true};
 const router = express.Router();
-const db = require('./db');
+const mysql=require('mysql');
 const port = process.env.PORT || 5000
 const path = require('path');
 
+const connection=mysql.createConnection({
+    host : 'localhost',
+    user : 'root',
+    password : '',
+    database : 'test'
+});
 
-
-db.connect((err)=>
+const connect=connection.connect((err)=>
 {
     if(err)
     {
@@ -21,10 +24,9 @@ db.connect((err)=>
         process.exit(1);
     }
     else{
-    
+        console.log('connection succefull');
     }
 });
-
 
 
 app.use('/',users);
@@ -44,3 +46,4 @@ app.listen(port,()=>
     console.log(`server running on ${port}`);
 });
 
+module.exports = {connection};

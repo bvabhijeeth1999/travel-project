@@ -21,6 +21,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Label,
 Modal,
 ModalHeader,
 ModalBody,
@@ -34,7 +35,8 @@ class BusList extends Component {
         modal1: false,
         modal2: false,
         cost : '0',
-        balance : '0'
+        balance : '0',
+        seats : '0'
     }
   
       componentDidMount(){
@@ -73,8 +75,8 @@ class BusList extends Component {
     onBookClick = (id,username,doj,nos,cost,source,destination,time) => {
       
       
-      
-     // this.props.getBalance(username);
+    
+     
        console.log('inside bus list component');
        console.log(id);
        console.log(username);
@@ -117,8 +119,16 @@ class BusList extends Component {
          this.setState(prevState => ({
           modal1: !prevState.modal1
         }));
-        this.props.updateBalance(username,new_balance)
-        this.props.addBooking(bookingInfo);
+        console.log(this.state.seats);
+        console.log(this.state.nos);
+        if(this.state.seats >= this.state.nos){
+          this.props.updateBalance(username,new_balance)
+          this.props.addBooking(bookingInfo);
+        }
+        else{
+          console.log('no of seats requested are not available');
+          //front end team need to convert this into pop up.
+        }
 
        }
        else{
@@ -129,15 +139,24 @@ class BusList extends Component {
         }));         
        }
 
+      //  this.props.getNoOfSeats(id,doj);
+      //  console.log('get no of tickets is called');
+      //  this.state.seats = this.props.tkt.seats;
+      //  console.log('printing the props');
+      //  console.log(this.props);
+      //  console.log('printing the filled seats');
+      //  console.log(this.state.seats);
+
      
     }
 
           
 
-    onBookClick1 = (bus_id,doj) => {
+    onBookClick1 = (username,source,destination,bus_id,doj) => {
 
-       this.props.getNoOfSeats(bus_id,doj);
-       this.props.history.push(`/book_tickets/mybook/${bus_id}/${doj}`);
+       this.props.getNoOfSeats(username,source,destination,bus_id,doj);
+       this.state.seats = 30-(this.props.tkt.seats);
+      this.props.history.push(`/book_tickets/bus_list/${username}/${source}/${destination}/${doj}/${bus_id}`);
     }
 
     onBookClick3 = () => {
@@ -163,7 +182,9 @@ class BusList extends Component {
       
       render() {
         const {buses} = this.props.bus;
+       // const seats = this.props.seats;
         this.state.balance = this.props.user.balance;
+        this.state.seats = 30-(this.props.tkt.seats);
         console.log('hello');
         console.log(`printing the balance from buslist page ${this.state.balance}`);
         return (
@@ -197,31 +218,44 @@ class BusList extends Component {
                                   <option>6</option>
                             </Input>
                             </FormGroup>
+                            <FormGroup>
+                      <Label for="exampleName">Seats Available :</Label>
+                      <Input
+                        type="text"
+                        name = "seats_available"
+                        id="exampleName"
+                        placeholder="Available seats"
+                        value = {(this.state.seats)}
+                      />
+                    </FormGroup>
+
                           </Form>
-                  {buses.map( ({ _id, bus_id , source , destination , travel_agency , cost , time}) => (
-                      <CSSTransition key={_id} timeout={500} classNames="fade">
+                          {buses.map( ({ bus_id , source , destination , travelagency , price , time}) => (
+                      <CSSTransition key={bus_id} timeout={500} classNames="fade">
                           <ListGroupItem>
-                         <b>Agency:</b> {travel_agency} <br/>
+                         <b>Agency:</b> {travelagency} <br/>
                           <b>Source:</b> {source} <br/>
                           <b>Destination:</b>{destination} <br/>
                           <b> Departure:</b> {time} <br/>
-                          <b>Cost per head:</b> {cost}
+                          <b>Cost per head:</b> {price}
                          
                   
                             
                             
-                            {/* <Button
-                                 className="book-btn"
-                                 color = "success"
-                                 size = "sm"
-                                 onClick = {this.onBookClick1.bind(this,bus_id,this.props.match.params.doj)}
-                                 >Check Availability</Button> */}
-
                             <Button
                                  className="book-btn"
                                  color = "success"
                                  size = "sm"
-                                 onClick = {this.onBookClick.bind(this,bus_id,this.props.match.params.username,this.props.match.params.doj,this.state.nos,cost,this.props.match.params.source,this.props.match.params.destination,time)}
+                                 onClick = {this.onBookClick1.bind(this,this.props.match.params.username,source,destination,bus_id,this.props.match.params.doj)}
+                                 >Check Availability</Button>
+
+
+             
+                            <Button
+                                 className="book-btn"
+                                 color = "success"
+                                 size = "sm"
+                                 onClick = {this.onBookClick.bind(this,bus_id,this.props.match.params.username,this.props.match.params.doj,this.state.nos,price,this.props.match.params.source,this.props.match.params.destination,time)}
                                  >Book Now</Button>
 
           <Modal isOpen={this.state.modal1} toggle={this.toggle1} className={this.props.className}>
@@ -263,7 +297,8 @@ class BusList extends Component {
 const mapStateToProps = (state) => ({
   bus : state.bus,
   book : state.book,
-  user : state.user
+  user : state.user,
+  tkt : state.tkt
 });
 
 export default connect(mapStateToProps, {getBuses,addBooking,getNoOfSeats,getBalance,updateBalance})(BusList);

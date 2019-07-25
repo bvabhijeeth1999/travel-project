@@ -108,9 +108,9 @@ export const deleteBooking = (username,id) => dispatch => {
         );
 };
 
-export const getNoOfSeats = (id,doj) => dispatch => {
-    axios
-        .get(`/mybook/${id}/${doj}`)
+export const getNoOfSeats = (username,source,destination,id,doj) => dispatch => {
+    axios  
+        .get(`/book_tickets/bus_list/${username}/${source}/${destination}/${doj}/${id}`)
         .then(res => 
             dispatch({
                 type : GET_SEATS,

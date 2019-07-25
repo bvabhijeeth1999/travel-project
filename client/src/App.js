@@ -29,6 +29,7 @@ class App extends Component {
           <Route exact path="/book_tickets/:a" component={BookT} />
           <Route exact path="/book_tickets/seats_booking/" component={SeatB} />
           <Route exact path="/book_tickets/bus_list/:username/:source/:destination/:doj" component={BusList} />
+          <Route exact path="/book_tickets/bus_list/:username/:source/:destination/:doj/:id" component={BusList} />
           <Route exact path="/signup/" component={Signup} />
           <Route exact path="/book_tickets/mybook/:username" component={Mybook}/>
           <Route exact path="/book_tickets/mywallet/:username" component={MyWallet}/>

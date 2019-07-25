@@ -30,9 +30,10 @@ class MyWallet extends Component {
   };
 
   componentDidMount(){
-    console.log('printing');
+    console.log('printinnnnnnnnnnnnnnnnnnnnnnnnnnnng');
     this.props.getBalance(this.props.match.params.username);
     this.state.balance = this.props.user.balance;
+    console.log(this.state.balance);
 
   }
 
@@ -45,6 +46,7 @@ class MyWallet extends Component {
         this.state.balance = this.props.user.balance;
         console.log("printing the username from on book click inside my wallet");
         console.log(username);
+        console.log(this.state.balance);
        // console.log(this.props.user);
     }
 
@@ -94,7 +96,7 @@ class MyWallet extends Component {
                       />
                     </FormGroup>
               <Button
-                onClick = {this.onBookClick1.bind(this,this.props.match.params.username,this.state.addMoney,balance)} className="MyWallet" color="secondary" 
+                onClick = {this.onBookClick1.bind(this,this.props.match.params.username,this.state.addMoney,this.state.balance)} className="MyWallet" color="secondary" 
               >
               ADD MONEY</Button>
 

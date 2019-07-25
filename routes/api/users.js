@@ -3,34 +3,42 @@ const router = express.Router();
 const collection = 'users';
 const collection1 = 'BusData';
 const collection2 = 'prevbookings';
-const db = require('../../db');
+const mysql=require('mysql');
 //User Model
 const User = require('../../models/User');
 const tkt = require('../../models/tkt');
-var ObjectId = require('mongodb').ObjectID;
 // @route POST api/users
 // @desc Add new users
 // @access Public
 
-var result1  = [];
 
+const connection=mysql.createConnection({
+    host : 'localhost',
+    user : 'root',
+    password : '',
+    database : 'test'
+});
+
+const connect=connection.connect((err)=>
+{
+    if(err)
+    {
+        console.log('unable to connect');
+        process.exit(1);
+    }
+    else{
+        console.log('connection succefull');
+    }
+});
 router.post('/signup',(req,res) => {
     
 
-    db.getDb().collection(collection).insertOne({
-        email : req.body.email,
-        name : req.body.username,
-        password : req.body.password,
-        dob : req.body.dob,
-        balance : req.body.balance
-    },(err,result)=>
-    {
-        if(err) console.log('errrr');
-        else
-        {
-            res.send('succesfully inserted');
+    connection.query("insert into users value('"+req.body.username+"','"+req.body.password+"','"+req.body.email+"','"+req.body.dob+"',0)",(err,result)=>{
+        if(err)console.log(err);
+        else{
+            console.log("signup successfull");
         }
-    });
+    })
 });
 
 router.post('/login/:username',(req,res) => {
@@ -39,38 +47,29 @@ router.post('/login/:username',(req,res) => {
     console.log(req.body.username);
     console.log(req.body.password);
 
-    db.getDb().collection(collection).findOne({
-        name : req.body.username,
-        password : req.body.password
-    },(err,result)=>
-    {
-        if(err) console.log(errrr);
-        else
-        {
-            if(result === null){
-                return res.status(401).json({ message: "plz check details" });
+        connection.query("SELECT name,password FROM users where name='"+req.body.username+"' and password='"+req.body.password+"'",(err,result)=>{
+        if(err) console.log(err);
+        else{
+            if(result[0]==null)
+            {
+                return res.status(401).json({message : "please check details"});
             }
             else{
-                return res.status(200).json({ message: "Successfull login" });
+                console.log(result);
+                return res.status(200).json({message : "login successfull"});
             }
         }
-       
     });
-    
 });
 
 router.post('/book_tickets',(req,res) => {
     console.log(req.body.source);
     console.log(req.body.destination);
-    db.getDb().collection(collection1).find({
-        source : req.body.source,
-        destination : req.body.destination
-    },(err,result)=>
-    {
-        if(err) console.log(errrr);
-        else
-        {
-            result1 = result;
+    connection.query("select * from BusData where source='"+req.body.source+"' and destination='"+req.body.destination+"'",(err,result)=>{
+        if(err)console.log(err);
+        else{
+            if(result[0]!=null)
+            console.log(result);
         }
     });
 });
@@ -80,20 +79,14 @@ router.get('/book_tickets/bus_list/:username/:source/:destination/:doj',(req,res
     
     console.log('now inside router.get and about to do the main finding part');
 
-    db.getDb().collection(collection1).find({
-        source : req.params.source,
-        destination : req.params.destination
-    }).toArray((err,result) => {
-        if(err){
-            console.log(err);
-        }
+    connection.query("select * from BusData where source='"+req.params.source+"' and destination='"+req.params.destination+"'",(err,result)=>{
+        if(err)console.log(err);
         else{
-            console.log(req.params.username);
-            console.log(req.params.source);
-            console.log('printing destination');
-            console.log(req.params.destination);
-            console.log(result);
-            res.send(result);
+            if(result[0]!=null)
+            {
+                console.log(result);
+                res.send(result);
+            }
         }
     });
 
@@ -107,27 +100,21 @@ router.post('/book_tickets/bus_list/:username/:source/:destination/:doj',(req,re
 
     
     console.log('now inside router.post and about to insert the booking into the database');
-
-    db.getDb().collection(collection2).insertOne({
-        username : req.body.username,
-        bus_id : req.body.id,
-        source : req.body.source,
-        destination : req.body.destination,
-        doj : req.body.doj,
-        nos : req.body.nos,
-        cost : req.body.cost,
-        time : req.body.time
-    },(err,result)=>
-    {
-        if(err) console.log('errrr');
-        else
-        {
-            res.send('succesfully inserted the booking data');
+    var id;
+    connection.query("select max(booking_id) from bookings",(err,result)=>{
+        if(err) console.log(err);
+        else{
+            console.log(result);
+            
+          //  console.log("id is "+id);
         }
-    });
-
-
-
+    })
+    connection.query("insert into bookings(doj,nos,bus_id,username) values('"+req.body.doj+"',"+req.body.nos+","+req.body.id+",'"+req.body.username+"')",(err,result)=>{
+        if(err)console.log(err);
+        else{
+            res.send('succesfull inserted');
+        }
+    })
 
 });
 
@@ -137,16 +124,17 @@ router.get('/mybook/:username',(req,res) => {
     
     console.log(`now inside router.get and about to return the past bookings of the user with name ${req.params.username}`);
 
-    db.getDb().collection(collection2).find({
-        username : req.params.username
-    }).toArray((err,result) => {
-        if(err){
-            console.log(err);
-        }
+    connection.query("select booking_id,username,bookings.bus_id,source,destination,doj,nos,price,time from bookings,busdata where bookings.bus_id=busdata.bus_id and username='"+req.params.username+"'",(err,result)=>{
+        if(err) console.log(err);
         else{
-            console.log(req.params.username);
-            console.log(result);
-            res.send(result);
+            if(result[0]!=null)
+            {
+                console.log(result);
+                res.send(result);
+            }
+            else{
+                console.log('no bookings');
+            }
         }
     });
 
@@ -157,20 +145,20 @@ router.get('/mybook/:username',(req,res) => {
 
 router.get('/mywallet/:username',(req,res) => {
   
-    console.log('inside possst');
+    console.log('inside getbalance');
     console.log(req.params.username);
 
-    db.getDb().collection(collection).findOne({
-        name : req.params.username
-    },(err,result)=>
-    {
-        if(err) console.log(errrr);
-        else
-        {
-            console.log(result);
-            res.send(result);
+    connection.query("select balance from users where name='"+req.params.username+"'",(err,result)=>{
+        if(err)console.log(err);
+        else{
+            if(result[0]!=null)
+            {
+                console.log(result);
+                res.send(JSON.stringify(result[0]));
+                console.log('printing result');
+                console.log(JSON.stringify(result[0]));
+            }
         }
-       
     });
     
 });
@@ -181,13 +169,14 @@ router.put('/mywallet/:username/:balance',(req,res) => {
     console.log(req.params.username);
     console.log('printing the new balance');
     console.log(req.params.balance);
-    db.getDb().collection(collection).findOneAndUpdate({ name : req.params.username},{$set : {balance : req.params.balance}},{returnOrginal: false},(err,result)=>
-    {
-        if(err) console.log("errrroorrr");
+    connection.query("update users set balance="+req.params.balance+" where name='"+req.params.username+"'",(err,result)=>{
+        if(err)console.log(err);
         else{
-            console.log('printing the result from users.js put route')
-            console.log(result);
-          //  res.send(result);
+            if(result[0]!=null)
+            {
+                console.log("in update balance");
+            
+            }
         }
     });
     
@@ -195,47 +184,50 @@ router.put('/mywallet/:username/:balance',(req,res) => {
 
 router.delete('/book_tickets/mybook/:username/:id',(req,res) => {
     //var dojo = doj.toString();
-    db.getDb().collection(collection2).deleteMany({
-        "_id": ObjectId(req.params.id)
-         
-    },(err,result)=>
-    {
-        if(err){  
-            res.status(404).json({success : false});
-        }
+    connection.query("delete from bookings where booking_id="+req.params.id,(err,result)=>{
+        if(err)console.log(err);
         else{
-            console.log(req.params.id);
-           // console.log(dojo);
-            console.log(result);
-            res.send('booking is successfully deleted');
+            if(result[0]!=null)
+            {
+                console.log("in update balance");
+            
+            }
         }
     });
 
     
 });
 
-router.get('/mybook/:id/:doj',(req,res) => {
+router.get('/book_tickets/bus_list/:username/:source/:destination/:doj/:id',(req,res) => {
     //var dojo = doj.toString();
-    db.getDb().collection(collection2).count({
-         bus_id : req.params.id,
-         doj : req.params.doj
-    },(err,result)=>
-    {
-        if(err){  
-            res.status(404).json({success : false});
-        }
+    connection.query("select sum(nos) as seat from bookings where bus_id="+req.params.id+" and doj='"+req.params.doj+"'",(err,result)=>{
+        if(err)console.log(err);
         else{
-            console.log(req.params.id);
-           // console.log(dojo);
-           console.log('printing count');
-            console.log(result);
-            res.send(result);
+            if(result[0]!=null)
+            {
+                res.send(JSON.stringify(result[0]));
+                console.log(result);
+            }
         }
     });
 
     
 });
+router.get('/book_tickets/bus_list/:id',(req,res) => {
+    //var dojo = doj.toString();
+    connection.query("create or replace procedure p1 as begin select sum(nos) as seat from bookings where bus_id="+req.params.id,(err,result)=>{
+        if(err)console.log(err);
+        else{
+            if(result[0]!=null)
+            {
+                res.send(JSON.stringify(result[0]));
+                console.log(result);
+            }
+        }
+    });
 
+    
+});
 
 router.put('/book_tickets/bus_list/:username/:source/:destination/:doj/:money',(req,res) => {
   

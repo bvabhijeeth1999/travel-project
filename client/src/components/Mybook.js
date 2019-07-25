@@ -36,8 +36,8 @@ class Mybook extends Component {
     this.state.balance = this.props.user.balance;
   }
 
-  onDeleteClick = (booking_id,id,doj,cost) => {
-    console.log(id);
+  onDeleteClick = (booking_id,doj,cost,nos) => {
+   // console.log(id);
    console.log(doj);
    console.log('printing the booking_id inside the component');
    console.log(booking_id);
@@ -45,7 +45,7 @@ class Mybook extends Component {
     this.props.history.push(`/book_tickets/mybook/${this.props.match.params.username}/${booking_id}`);
     
    // console.log(`calling the update balance method with ${this.props.username} and ${cost}`);
-   const newmoney = parseInt(this.state.balance)+parseInt(cost);
+   const newmoney = parseInt(this.state.balance)+parseInt(cost*nos);
    this.props.updateBalance(this.props.match.params.username,newmoney);
   }
 
@@ -73,21 +73,21 @@ class Mybook extends Component {
                           
 
             <TransitionGroup className = "Mybook">
-                {bookings.map( ({ _id, bus_id ,source , destination, doj , nos , cost }) => (
-                    <CSSTransition key={_id} timeout={500} classNames="fade">
+            {bookings.map( ({ booking_id,bus_id ,source , destination, doj , nos , price }) => (
+                    <CSSTransition key={booking_id} timeout={500} classNames="fade">
                         <ListGroupItem>
                         <b>BUS_ID : </b> {bus_id} <br />
                         <b>SOURCE : </b> {source} <br />
                         <b>DESTINATION : </b> {destination} <br />
                         <b>DATE OF JOURNEY : </b> {doj} <br />
                         <b>NO OF SEATS : </b>{nos} <br />
-                        <b>TOTAL COST : </b>{cost} 
+                        <b>TOTAL COST : </b>{nos*price} 
 
                         <Button
                                  className="book-btn"
                                  color = "success"
                                  size = "sm"
-                                 onClick = {this.onDeleteClick.bind(this,_id,bus_id,doj,cost)}
+                                 onClick = {this.onDeleteClick.bind(this,booking_id,doj,price,nos)}
                                  >Cancel</Button>
 
                         </ListGroupItem>
